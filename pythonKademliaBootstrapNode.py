@@ -11,7 +11,7 @@ Port = sys.argv[3]
 
 
 async def Start_Peer_Node():
-    node = kademlia.network.Server()
+    node = Server()
     await node.listen(int(Port))
 
     if len(sys.argv) > 4:

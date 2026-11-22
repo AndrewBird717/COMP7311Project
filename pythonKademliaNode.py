@@ -1,5 +1,5 @@
 import hashlib
-import kademlia
+from kademlia.network import Server
 import asyncio
 import time
 import sys
@@ -18,7 +18,7 @@ def keepRunning():
 
 async def Start_Peer_Node():
 
-    node = kademlia.network.Server()
+    node = Server()
     await node.listen(int(Port))
 
     await node.bootstrap([(BS_IP, int(BS_Port))])
@@ -50,7 +50,7 @@ def log_times(times):
     filepath = Path(str(ExperimentID)) / f"{MonotonicID}.txt"
     with filepath.open("w", encoding="utf-8") as file:
         for key, value in times.items():
-            file.write(value, "\n")
+            file.write(f"{value} \n")
         file.flush()
         
 
