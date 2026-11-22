@@ -43,14 +43,14 @@ def log_time(time):
     logdir.mkdir(parents=True, exist_ok=True)
     filepath = logdir / f"{MonotonicID}.txt"
     filepath.touch(exist_ok=True)
-    with filepath.open("w", encoding="utf-8") as file:
+    with filepath.open("a", encoding="utf-8") as file:
         file.write(f"{time} \n")
         file.flush()   
 
 async def Publish_KVs(node, myKV):
-
     for key, value in myKV.items():
         new_val = hashlib.sha1(str(key).encode("utf-8")).hexdigest()
+        log_time(str(key)," - ", str(new_val), "\n")
         await node.set(key, new_val)
 
 async def Get_KVs(node, desired_KV_dict):
@@ -81,7 +81,7 @@ async def main():
 
     node = await Start_Peer_Node()
     await Publish_KVs(node, HeldKeys)
-    log_time("aaaa")
+    log_time("START")
     retrieved_KVs, times = await Get_KVs(node, DesiredKeys)
     log_times(times)
     while True:
