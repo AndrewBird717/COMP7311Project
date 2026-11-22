@@ -62,6 +62,8 @@ async def main():
     await Publish_KVs(node, myKV)
     retrieved_KVs, times = await Get_KVs(node, desired_KV)
     log_times(times)
+    while True:
+        await asyncio.sleep(1)
 
 if __name__ == "__main__":
     print("UPUPUP")
