@@ -50,16 +50,16 @@ def log_time(time):
 async def Publish_KVs(node, myKV):
     for key, value in myKV.items():
         new_val = hashlib.sha1(str(key).encode("utf-8")).hexdigest()
-        log_time("HELD KEYS:\n")
-        log_time(str(key) + " - " + str(new_val) + "\n")
+        #log_time("HELD KEYS:\n")
+        #log_time(str(key) + " - " + str(new_val) + "\n")
         await node.set(key, new_val)
 
 async def Get_KVs(node, desired_KV_dict):
     desired_KV = []
-    log_time(" DESIRED KEYS:\n")
+    #log_time(" DESIRED KEYS:\n")
     for key in desired_KV_dict.keys():
         desired_KV.append(key)
-        log_time(str(key) + " - " + "UNKNOWN\n")
+        #log_time(str(key) + " - " + "UNKNOWN\n")
     result_KV = {}
     times = {}
     i = 0
@@ -75,6 +75,7 @@ async def Get_KVs(node, desired_KV_dict):
             log_time(str(my_time))
         else:
             i = (i+1) % len(desired_KV)
+    #log_time(str(key) + " - " + "str(result_KV[key])\n")
     return result_KV, times
 
 
