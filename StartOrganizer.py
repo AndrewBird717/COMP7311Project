@@ -63,6 +63,11 @@ if __name__ == "__main__":
     ExperimentID = time.time()
 
     for i, host in enumerate(net.hosts):
+        for i, process in processes.items():
+            print(
+                f"Node {i}: PID={process.pid}, "
+                f"Exit code={process.poll()}"
+            )
         if i < BS_count:
             if i == 0:
                 processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000")
