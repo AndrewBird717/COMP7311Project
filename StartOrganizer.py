@@ -4,8 +4,11 @@ import sys
 import random
 import hashlib
 import time
+from pathlib import Path
 from mininet.net import Mininet
 from mininet.node import OVSSwitch
+
+PYTHON = str(Path(".venv/bin/python").resolve())
 
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
