@@ -69,7 +69,14 @@ if __name__ == "__main__":
         else:
             BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
             processes[i] = host.popen(f"python3 pythonKademliaNode.py {i} {time.time()} 8000 {BS_IP} 8000")
-    input("Hit enter to end (All nodes have been created)...")
-    for id, process in processes.items():
-        process.terminate()
+    time.sleep(2)
+
+    for i, process in processes.items():
+        print(
+            f"Node {i}: PID={process.pid}, "
+            f"Exit code={process.poll()}"
+        )
+        input("Hit enter to end (All nodes have been created)...")
+        for id, process in processes.items():
+            process.terminate()
     net.stop()
