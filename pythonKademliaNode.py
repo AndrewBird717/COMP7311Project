@@ -42,7 +42,7 @@ def log_time(time):
     logdir = Path("ExperimentLogs") / str(ExperimentID)
     logdir.mkdir(parents=True, exist_ok=True)
     filepath = logdir / f"{MonotonicID}.txt"
-    with filepath.open("w", encoding="utf-8") as file:
+    with filepath.open("a", encoding="utf-8") as file:
         file.write(f"{time} \n")
         file.flush()   
 
@@ -65,9 +65,10 @@ async def Get_KVs(node, desired_KV_dict):
         end = time.time_ns()
         if temp != None:
             result_KV[desired_KV[i]] = temp
-            times[desired_KV[i]] = end - start
+            time = (end - start) / 1000000
+            times[desired_KV[i]] = time
             desired_KV.pop(i)
-            log_time(end- start)
+            log_time(time)
         else:
             i = (i+1) % len(desired_KV)
     return result_KV, times
