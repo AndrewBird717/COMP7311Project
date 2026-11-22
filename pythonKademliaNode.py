@@ -26,8 +26,10 @@ async def Start_Peer_Node():
     return node
 
 async def Publish_KVs(node, myKV):
+
     for key, value in myKV.items():
-        await node.set(key, value)
+        new_val = hashlib.sha1(str(key).encode("utf-8")).hexdigest()
+        await node.set(key, new_val)
 
 async def Get_KVs(node, desired_KV):
     result_KV = {}
