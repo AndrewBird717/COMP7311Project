@@ -25,3 +25,7 @@ def main():
     print("LOG READER RUNNING...")
     data_arr = GetLookupTimes()
     GetMetricsFromDataArr(data_arr)
+
+
+if __name__ == "__main__":
+    main()
