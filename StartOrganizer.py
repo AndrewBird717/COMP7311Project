@@ -87,6 +87,10 @@ if __name__ == "__main__":
             f"Exit code={process.poll()}"
         )
     input("Hit enter to end (All nodes have been created)...")
+    x = 0
+    while True:
+        x += 1
+
     for id, process in processes.items():
         process.terminate()
     net.stop()
