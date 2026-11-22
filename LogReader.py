@@ -22,5 +22,6 @@ def GetMetricsFromDataArr(data_arr):
 
 
 def main():
+    print("LOG READER RUNNING...")
     data_arr = GetLookupTimes()
     GetMetricsFromDataArr(data_arr)
