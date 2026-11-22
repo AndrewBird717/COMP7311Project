@@ -4,7 +4,7 @@ import numpy as np
 
 def GetLookupTimes():
     res = []
-    dir = Path(f"ExperimentLogs") / "LookupTimes" / str(sys.Args[1])
+    dir = Path(f"ExperimentLogs") / "LookupTimes" / str(sys.argv[1])
     for filepath in dir.iterdir():
         if filepath.is_file():
             data = filepath.read_text(encoding="utf-8")
