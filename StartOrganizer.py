@@ -51,7 +51,12 @@ if __name__ == "__main__":
     # Start network
     net.build()
     net.start()
-    processes = {}
+    print("Created hosts:", [h.name for h in net.hosts])
+
+    for host in net.hosts:
+        print(host.name, host.IP())
+        processes = {}
+
     for i, host in enumerate(net.hosts):
         if i < BS_count:
             if i == 0:
