@@ -42,6 +42,7 @@ def log_time(time):
     logdir = Path("ExperimentLogs") / str(ExperimentID)
     logdir.mkdir(parents=True, exist_ok=True)
     filepath = logdir / f"{MonotonicID}.txt"
+    filepath.touch(exist_ok=True)
     with filepath.open("w", encoding="utf-8") as file:
         file.write(f"{time} \n")
         file.flush()   
