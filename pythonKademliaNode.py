@@ -4,6 +4,7 @@ import asyncio
 import time
 import sys
 from pathlib import Path
+import json
 
 
 #usage . MonontonicID ExperimentID Port BS_Node HeldKeys DesiredKeys
@@ -12,8 +13,8 @@ ExperimentID = sys.argv[2]
 Port = sys.argv[3]
 BS_IP = sys.argv[4]
 BS_Port = sys.argv[5]
-HeldKeys = sys.argv[6]
-DesiredKeys = sys.argv[7]
+HeldKeys = json.loads(sys.argv[6])
+DesiredKeys = json.loads(sys.argv[7])
 
 def keepRunning():
     return True
