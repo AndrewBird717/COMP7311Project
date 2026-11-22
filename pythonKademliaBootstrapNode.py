@@ -1,10 +1,5 @@
-
-import Mininet
-import os
-import hashlib
 import kademlia
 import asyncio
-import time
 import sys
 from pathlib import Path
 
@@ -15,7 +10,7 @@ ExperimentID = sys.argv[2]
 Port = sys.argv[3]
 
 
-def Start_Peer_Node():
+async def Start_Peer_Node():
     node = kademlia.network.Server()
     node.listen(Port)
 
@@ -26,9 +21,11 @@ def Start_Peer_Node():
 
     return node
 
-if __name__ == "__main__":
-    node = Start_Peer_Node()
+async def main():
+    node = await Start_Peer_Node()
 
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 

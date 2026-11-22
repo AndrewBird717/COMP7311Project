@@ -1,4 +1,3 @@
-
 import hashlib
 import kademlia
 import asyncio
@@ -17,38 +16,26 @@ BS_Port = sys.argv[5]
 def keepRunning():
     return True
 
-def get_w_intermediates(node, key):
-    key_hash = kademlia.utils.digest(key)
-    if node.storage.get(key_hash) != None:
-            return NotImplementedError.storage.get(key_hash), []
-    target = kademlia.node.Node(key_hash)
-    nearest = node.protocol.router.find_neighbors(target)
-    if not nearest:
-        return None, []
-
-    spider = kademlia.ValueSpiderCrawl(node.protocol, target, nearest, node.ksize, node.alpha)
-    value = spider.find()
-
-def Start_Peer_Node():
+async def Start_Peer_Node():
 
     node = kademlia.network.Server()
-    node.listen(Port)
+    await node.listen(Port)
 
-    node.bootstrap([(BS_IP, BS_Port)])
+    await node.bootstrap([(BS_IP, BS_Port)])
 
     return node
 
-def Publish_KVs(node, myKV):
+async def Publish_KVs(node, myKV):
     for key, value in myKV.items():
-        node.set(key, value)
+        await node.set(key, value)
 
-def Get_KVs(node, desired_KV):
+async def Get_KVs(node, desired_KV):
     result_KV = {}
     times = {}
     i = 0
     while i < len(desired_KV) and keepRunning():
         start = time.time_ns()
-        temp = node.get(desired_KV[i])
+        temp = await node.get(desired_KV[i])
         end = time.time_ns()
         if temp != None:
             result_KV[desired_KV[i]] = temp
@@ -56,7 +43,7 @@ def Get_KVs(node, desired_KV):
             desired_KV.pop(i)
         else:
             i += 1
-        return result_KV, times
+    return result_KV, times
 
 def log_times(times):
     filepath = Path(str(ExperimentID)) / f"{MonotonicID}.txt"
@@ -66,17 +53,14 @@ def log_times(times):
         file.flush()
         
 
-
-
-if __name__ == "__main__":
+async def main():
     myKV = {}
     desired_KV = []
 
-    node = Start_Peer_Node()
-    Publish_KVs(node, myKV)
-    retrieved_KVs, times = Get_KVs(node, desired_KV)
+    node = await Start_Peer_Node()
+    await Publish_KVs(node, myKV)
+    retrieved_KVs, times = await Get_KVs(node, desired_KV)
     log_times(times)
 
-
-
-
+if __name__ == "__main__":
+    asyncio.run(main())
