@@ -56,9 +56,9 @@ async def Publish_KVs(node, myKV):
 
 async def Get_KVs(node, desired_KV_dict):
     desired_KV = []
+    log_time(" DESIRED KEYS:\n")
     for key in desired_KV_dict.keys():
         desired_KV.append(key)
-        log_time(" DESIRED KEYS:\n")
         log_time(str(key) + " - " + "UNKNOWN\n")
     result_KV = {}
     times = {}
@@ -84,9 +84,8 @@ async def main():
 
     node = await Start_Peer_Node()
     await Publish_KVs(node, HeldKeys)
-    log_time("START")
     retrieved_KVs, times = await Get_KVs(node, DesiredKeys)
-    log_times(times)
+    #log_times(times)
     while True:
         await asyncio.sleep(1)
 
