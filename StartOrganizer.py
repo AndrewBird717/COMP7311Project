@@ -60,11 +60,11 @@ if __name__ == "__main__":
     for i, host in enumerate(net.hosts):
         if i < BS_count:
             if i == 0:
-                processes[i] = host.popen(f"python3 pythonKademliaBootstrapNode.py {i} {time.time()} 8000")
+                processes[i] = host.popen(f"python3 -u pythonKademliaBootstrapNode.py {i} {time.time()} 8000")
                 time.sleep(1)
                 continue
             BS_IP = net.hosts[i-1].IP()
-            processes[i] = host.popen(f"python3 pythonKademliaBootstrapNode.py {i} {time.time()} 8000 {BS_IP} 8000")
+            processes[i] = host.popen(f"python3 -u pythonKademliaBootstrapNode.py {i} {time.time()} 8000 {BS_IP} 8000")
             time.sleep(1)
         else:
             BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
