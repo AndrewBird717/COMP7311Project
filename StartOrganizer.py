@@ -8,7 +8,7 @@ from pathlib import Path
 from mininet.net import Mininet
 from mininet.node import OVSSwitch
 
-PYTHON = str(Path(".venv/bin/python").resolve())
+PYTHON = ".venv/bin/python"
 
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
