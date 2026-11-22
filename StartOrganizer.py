@@ -63,7 +63,6 @@ if __name__ == "__main__":
     ExperimentID = time.time()
 
     for i, host in enumerate(net.hosts):
-
         if i < BS_count:
             if i == 0:
                 processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000")
@@ -75,7 +74,7 @@ if __name__ == "__main__":
         else:
             BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
             processes[i] = host.popen(f"{PYTHON} pythonKademliaNode.py {i} {ExperimentID} 8000 {BS_IP} 8000 {Get_HeldKeys_JSON} {Get_DesiredKeys_JSON}")
-    time.sleep(2)
+            time.sleep(2)
 
     for i, process in processes.items():
         print(
