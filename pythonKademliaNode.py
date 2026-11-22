@@ -46,7 +46,7 @@ async def Get_KVs(node, desired_KV):
     return result_KV, times
 
 def log_times(times):
-    Path(f"{ExperimentID}").mkdir(parents=True, exist_ok=True)
+    Path(f"ExperimentLogs/{ExperimentID}").mkdir(parents=True, exist_ok=True)
     filepath = Path(str(ExperimentID)) / f"{MonotonicID}.txt"
     with filepath.open("w", encoding="utf-8") as file:
         for key, value in times.items():
