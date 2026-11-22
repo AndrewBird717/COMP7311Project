@@ -19,9 +19,9 @@ def keepRunning():
 async def Start_Peer_Node():
 
     node = kademlia.network.Server()
-    await node.listen(Port)
+    await node.listen(int(Port))
 
-    await node.bootstrap([(BS_IP, BS_Port)])
+    await node.bootstrap([(BS_IP, int(BS_Port))])
 
     return node
 
@@ -46,6 +46,7 @@ async def Get_KVs(node, desired_KV):
     return result_KV, times
 
 def log_times(times):
+    Path(f"{ExperimentID}").mkdir(parents=True, exist_ok=True)
     filepath = Path(str(ExperimentID)) / f"{MonotonicID}.txt"
     with filepath.open("w", encoding="utf-8") as file:
         for key, value in times.items():
@@ -63,4 +64,5 @@ async def main():
     log_times(times)
 
 if __name__ == "__main__":
+    print("UPUPUP")
     asyncio.run(main())

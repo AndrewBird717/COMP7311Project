@@ -12,12 +12,12 @@ Port = sys.argv[3]
 
 async def Start_Peer_Node():
     node = kademlia.network.Server()
-    node.listen(Port)
+    node.listen(int(Port))
 
     if len(sys.argv) > 4:
         BS_IP = sys.argv[4]
         BS_Port = sys.argv[5]
-        node.bootstrap([(BS_IP, BS_Port)])
+        node.bootstrap([(BS_IP, int(BS_Port))])
 
     return node
 
