@@ -12,17 +12,24 @@ Port = sys.argv[3]
 
 async def Start_Peer_Node():
     node = kademlia.network.Server()
-    node.listen(int(Port))
+    await node.listen(int(Port))
 
     if len(sys.argv) > 4:
         BS_IP = sys.argv[4]
         BS_Port = sys.argv[5]
-        node.bootstrap([(BS_IP, int(BS_Port))])
+        await node.bootstrap([(BS_IP, int(BS_Port))])
 
     return node
 
 async def main():
     node = await Start_Peer_Node()
+    print(f"Bootstrap node {MonotonicID} started on port {Port}")
+
+    try:
+        # Keep the node running indefinitely
+        await asyncio.Event().wait()
+    finally:
+        node.stop()
 
 if __name__ == "__main__":
     asyncio.run(main())
