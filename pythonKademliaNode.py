@@ -39,9 +39,9 @@ def log_times(times):
         file.flush()
 
 def log_time(time):
-    logdir = Path("ExperimentLogs") / str(ExperimentID)
+    logdir = Path("ExperimentLogs") / "LookupTimes" / str(ExperimentID)
     logdir.mkdir(parents=True, exist_ok=True)
-    filepath = logdir / f"{MonotonicID}.txt"
+    filepath = logdir / f"Node_{MonotonicID}_Lookups.txt"
     filepath.touch(exist_ok=True)
     with filepath.open("a", encoding="utf-8") as file:
         file.write(f"{time} \n")
