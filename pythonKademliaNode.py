@@ -52,6 +52,7 @@ def log_times(times):
     logdir.mkdir(parents=True, exist_ok=True)
     filepath = logdir / f"{MonotonicID}.txt"
     with filepath.open("w", encoding="utf-8") as file:
+        file.write("Start \n")
         for key, value in times.items():
             file.write(f"{value} \n")
         file.flush()
