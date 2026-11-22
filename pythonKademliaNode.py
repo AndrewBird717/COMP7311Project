@@ -66,7 +66,7 @@ async def Get_KVs(node, desired_KV_dict):
         end = time.time_ns()
         if temp != None:
             result_KV[desired_KV[i]] = temp
-            time = (end - start)
+            time = (end - start) / 1000000
             times[desired_KV[i]] = time
             desired_KV.pop(i)
             log_time(str(time))
@@ -81,6 +81,7 @@ async def main():
 
     node = await Start_Peer_Node()
     await Publish_KVs(node, HeldKeys)
+    log_time("aaaa")
     retrieved_KVs, times = await Get_KVs(node, DesiredKeys)
     log_times(times)
     while True:
