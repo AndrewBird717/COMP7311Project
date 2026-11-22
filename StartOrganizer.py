@@ -23,7 +23,7 @@ def Get_HeldKeys_JSON():
     json_d = json.dumps(res)
     return json_d
 
-def Get_DesiredKeys():
+def Get_DesiredKeys_JSON():
     res = {}
     for i in range(HeldKeysPerNode):
         temp = random.randint(1, 1000)
@@ -74,7 +74,7 @@ if __name__ == "__main__":
             time.sleep(1)
         else:
             BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
-            processes[i] = host.popen(f"{PYTHON} pythonKademliaNode.py {i} {ExperimentID} 8000 {BS_IP} 8000")
+            processes[i] = host.popen(f"{PYTHON} pythonKademliaNode.py {i} {ExperimentID} 8000 {BS_IP} 8000 {Get_HeldKeys_JSON} {Get_DesiredKeys_JSON}")
     time.sleep(2)
 
     for i, process in processes.items():

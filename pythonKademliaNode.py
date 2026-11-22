@@ -6,12 +6,14 @@ import sys
 from pathlib import Path
 
 
-#usage . MonontonicID ExperimentID Port BS_Node
+#usage . MonontonicID ExperimentID Port BS_Node HeldKeys DesiredKeys
 MonotonicID = sys.argv[1]
 ExperimentID = sys.argv[2]
 Port = sys.argv[3]
 BS_IP = sys.argv[4]
 BS_Port = sys.argv[5]
+HeldKeys = sys.argv[6]
+DesiredKeys = sys.argv[7]
 
 def keepRunning():
     return True
@@ -59,12 +61,10 @@ def log_times(times):
         
 
 async def main():
-    myKV = {}
-    desired_KV = []
 
     node = await Start_Peer_Node()
-    await Publish_KVs(node, myKV)
-    retrieved_KVs, times = await Get_KVs(node, desired_KV)
+    await Publish_KVs(node, HeldKeys)
+    retrieved_KVs, times = await Get_KVs(node, DesiredKeys)
     log_times(times)
     while True:
         await asyncio.sleep(1)
