@@ -76,7 +76,7 @@ if __name__ == "__main__":
             f"Node {i}: PID={process.pid}, "
             f"Exit code={process.poll()}"
         )
-        input("Hit enter to end (All nodes have been created)...")
-        for id, process in processes.items():
-            process.terminate()
+    input("Hit enter to end (All nodes have been created)...")
+    for id, process in processes.items():
+        process.terminate()
     net.stop()
