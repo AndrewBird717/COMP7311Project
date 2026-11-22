@@ -27,6 +27,24 @@ async def Start_Peer_Node():
 
     return node
 
+def log_times(times):
+    logdir = Path("ExperimentLogs") / str(ExperimentID)
+    logdir.mkdir(parents=True, exist_ok=True)
+    filepath = logdir / f"{MonotonicID}.txt"
+    with filepath.open("w", encoding="utf-8") as file:
+        file.write("Start \n")
+        for key, value in times.items():
+            file.write(f"{value} \n")
+        file.flush()
+
+def log_time(time):
+    logdir = Path("ExperimentLogs") / str(ExperimentID)
+    logdir.mkdir(parents=True, exist_ok=True)
+    filepath = logdir / f"{MonotonicID}.txt"
+    with filepath.open("w", encoding="utf-8") as file:
+        file.write(f"{time} \n")
+        file.flush()   
+
 async def Publish_KVs(node, myKV):
 
     for key, value in myKV.items():
@@ -45,19 +63,12 @@ async def Get_KVs(node, desired_KV):
             result_KV[desired_KV[i]] = temp
             times[desired_KV[i]] = end - start
             desired_KV.pop(i)
+            log_time(end-start)
         else:
             i += 1
     return result_KV, times
 
-def log_times(times):
-    logdir = Path("ExperimentLogs") / str(ExperimentID)
-    logdir.mkdir(parents=True, exist_ok=True)
-    filepath = logdir / f"{MonotonicID}.txt"
-    with filepath.open("w", encoding="utf-8") as file:
-        file.write("Start \n")
-        for key, value in times.items():
-            file.write(f"{value} \n")
-        file.flush()
+
         
 
 async def main():
