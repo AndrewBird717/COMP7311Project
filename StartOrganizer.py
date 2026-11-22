@@ -18,7 +18,7 @@ KeyRange = 10
 def Get_HeldKeys_JSON():
     res = {}
     for i in range(HeldKeysPerNode):
-        temp = random.randint(1, 1000)
+        temp = random.randint(1, KeyRange)
         res[temp] = hashlib.sha1(str(temp).encode()).hexdigest()
     json_d = json.dumps(res)
     return json_d
@@ -26,7 +26,7 @@ def Get_HeldKeys_JSON():
 def Get_DesiredKeys_JSON():
     res = {}
     for i in range(HeldKeysPerNode):
-        temp = random.randint(1, 1000)
+        temp = random.randint(1, KeyRange)
         res[temp] = None
     json_d = json.dumps(res)
     return json_d
