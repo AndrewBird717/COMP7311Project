@@ -1,4 +1,4 @@
-import kademlia
+from kademlia.network import Server
 import asyncio
 import sys
 from pathlib import Path
