@@ -63,7 +63,7 @@ async def Get_KVs(node, desired_KV):
             result_KV[desired_KV[i]] = temp
             times[desired_KV[i]] = end - start
             desired_KV.pop(i)
-            log_time(end-start)
+            log_time(end- start)
         else:
             i += 1
     return result_KV, times
