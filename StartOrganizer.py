@@ -16,15 +16,15 @@ def Get_HeldKeys_JSON():
     res = {}
     for i in range(HeldKeysPerNode):
         temp = random.randint(1, 1000)
-        res[temp] = hashlib.sha1(temp)
+        res[temp] = hashlib.sha1(str(temp).encode()).hexdigest()
     json_d = json.dumps(res)
     return json_d
 
 def Get_DesiredKeys():
     res = {}
     for i in range(HeldKeysPerNode):
-        temp = None
-        res[temp] = hashlib.sha1(temp)
+        temp = random.randint(1, 1000)
+        res[temp] = None
     json_d = json.dumps(res)
     return json_d
 
@@ -56,11 +56,13 @@ if __name__ == "__main__":
         if i < BS_count:
             if i == 0:
                 processes[i] = host.popen(f"Python3 pythonKademliaBootstrapNode.py {i} {time.time()} 8000")
-            continue
-            BS_IP = net.hosts[i-1]
-            processes[i] = host.popen(f"Python3 pythonKademliaBootstrapNode.py {i} {time.time()} 8000 {BS_IP} 8000")
+                continue
+            BS_IP = net.hosts[i-1].IP()
+            processes[i] = host.popen(f"python3 pythonKademliaBootstrapNode.py {i} {time.time()} 8000 {BS_IP} 8000")
         else:
             BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
-            processes[i] = host.popen(f"Python3 pythonKademliaNode.py {i} {time.time()} 8000 {BS_IP} 8000")
+            processes[i] = host.popen(f"python3 pythonKademliaNode.py {i} {time.time()} 8000 {BS_IP} 8000")
     input("Hit enter to end (All nodes have been created)...")
+    for id, process in processes.items():
+        process.terminate()
     net.stop()
