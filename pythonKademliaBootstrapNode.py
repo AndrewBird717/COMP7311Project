@@ -24,12 +24,8 @@ async def Start_Peer_Node():
 async def main():
     node = await Start_Peer_Node()
     print(f"Bootstrap node {MonotonicID} started on port {Port}")
-
-    try:
-        # Keep the node running indefinitely
-        await asyncio.Event().wait()
-    finally:
-        node.stop()
+    while True:
+        asyncio.sleep(1)
 
 if __name__ == "__main__":
     asyncio.run(main())
