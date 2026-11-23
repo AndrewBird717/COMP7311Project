@@ -70,6 +70,8 @@ async def Get_KVs(node, desired_KV_dict):
     while (i < len(desired_KV) and keepRunning) or keepRunning:
         start = time.time_ns()
         if i >= len(desired_KV):
+            if len(desired_KV) <= 0:
+                continue
             i = i %  len(desired_KV)
         temp = await node.get(desired_KV[i])
         end = time.time_ns()
