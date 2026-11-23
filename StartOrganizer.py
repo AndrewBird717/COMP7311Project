@@ -12,12 +12,12 @@ PYTHON = ".venv/bin/python"
 
 Alpha = 3
 BucketSize = 12
-HeldKeysPerNode = 80
+HeldKeysPerNode = 12
 DesiredKeysPerNode = 100
-KeyRange = 20
+KeyRange = 250
 
 # Add as many hosts as you want
-host_count = 100
+host_count = 40
 BS_count = 1
 def Get_HeldKeys_JSON():
     res = {}
