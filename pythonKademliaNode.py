@@ -15,6 +15,8 @@ BS_IP = sys.argv[4]
 BS_Port = sys.argv[5]
 HeldKeys = json.loads(sys.argv[6])
 DesiredKeys = json.loads(sys.argv[7])
+Alpha = sys.argv[8]
+BucketSize = sys.argv[9]
 
 timeout = 5.0
 
@@ -25,6 +27,8 @@ async def Start_Peer_Node():
 
     node = Server()
     await node.listen(int(Port))
+    node.alpha = Alpha
+    node.ksize = BucketSize
 
     await node.bootstrap([(BS_IP, int(BS_Port))])
 
