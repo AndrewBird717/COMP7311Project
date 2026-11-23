@@ -25,10 +25,8 @@ def keepRunning():
 
 async def Start_Peer_Node():
 
-    node = Server()
+    node = Server(alpha=Alpha, ksize=BucketSize)
     await node.listen(int(Port))
-    node.alpha = Alpha
-    node.ksize = BucketSize
 
     await node.bootstrap([(BS_IP, int(BS_Port))])
 
