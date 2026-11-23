@@ -12,7 +12,7 @@ PYTHON = ".venv/bin/python"
 
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
-KeyRange = 20
+KeyRange = 10
 
 # Add as many hosts as you want
 host_count = 20
