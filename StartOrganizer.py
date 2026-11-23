@@ -12,7 +12,7 @@ PYTHON = ".venv/bin/python"
 
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
-KeyRange = 10
+KeyRange = 100
 
 
 def Get_HeldKeys_JSON():
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     switch = net.addSwitch("s1", failMode="standalone")
 
     # Add as many hosts as you want
-    host_count = 10
+    host_count = 100
     BS_count = 1
 
     for i in range(host_count + BS_count):
