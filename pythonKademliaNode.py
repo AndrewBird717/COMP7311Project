@@ -16,7 +16,7 @@ BS_Port = sys.argv[5]
 HeldKeys = json.loads(sys.argv[6])
 DesiredKeys = json.loads(sys.argv[7])
 
-timeout = 5
+timeout = 5.0
 
 def keepRunning():
     return True
