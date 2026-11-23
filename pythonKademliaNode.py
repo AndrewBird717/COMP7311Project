@@ -74,8 +74,8 @@ async def Get_KVs(node, desired_KV_dict):
             my_time = (end - start) / 1000000000
             times[desired_KV[i]] = my_time
             desired_KV.pop(i)
-            if my_time < timeout:
-                log_time(str(my_time))# +" - "+ str(desired_KV[i]) +" - "+ str(temp))
+            #if my_time < timeout:
+            log_time(str(my_time))# +" - "+ str(desired_KV[i]) +" - "+ str(temp))
         else:
             i = (i+1) % len(desired_KV)
     #log_time(str(key) + " - " + "str(result_KV[key])\n")
