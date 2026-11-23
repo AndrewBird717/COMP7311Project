@@ -14,7 +14,7 @@ Alpha = 3
 BucketSize = 12
 HeldKeysPerNode = 8
 DesiredKeysPerNode = 10
-KeyRange = 700
+KeyRange = 200
 
 # Add as many hosts as you want
 host_count = 100
