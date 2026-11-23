@@ -10,8 +10,8 @@ from mininet.node import OVSSwitch
 
 PYTHON = ".venv/bin/python"
 
-Alpha = 3
-BucketSize = 20
+Alpha = 1
+BucketSize = 1
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
 KeyRange = 250
