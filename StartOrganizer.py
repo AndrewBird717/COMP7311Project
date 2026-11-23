@@ -17,7 +17,7 @@ DesiredKeysPerNode = 10
 KeyRange = 250
 
 # Add as many hosts as you want
-host_count = 100
+host_count = 50
 BS_count = 1
 def Get_HeldKeys_JSON():
     res = {}
