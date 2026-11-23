@@ -16,6 +16,8 @@ BS_Port = sys.argv[5]
 HeldKeys = json.loads(sys.argv[6])
 DesiredKeys = json.loads(sys.argv[7])
 
+timeout = 5
+
 def keepRunning():
     return True
 
@@ -65,14 +67,15 @@ async def Get_KVs(node, desired_KV_dict):
     i = 0
     while (i < len(desired_KV) and keepRunning) or keepRunning:
         start = time.time_ns()
-        temp = await node.get(desired_KV[i])
+        temp = await node.get(desired_KV[i], timeout=timeout)
         end = time.time_ns()
         if temp != None:
             result_KV[desired_KV[i]] = temp
-            my_time = (end - start) / 1000000
+            my_time = (end - start) / 1000000000
             times[desired_KV[i]] = my_time
             desired_KV.pop(i)
-            log_time(str(my_time) +" - "+ str(desired_KV[i]) +" - "+ str(temp))
+            if my_time < timeout:
+                log_time(str(my_time))# +" - "+ str(desired_KV[i]) +" - "+ str(temp))
         else:
             i = (i+1) % len(desired_KV)
     #log_time(str(key) + " - " + "str(result_KV[key])\n")
