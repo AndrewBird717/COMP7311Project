@@ -92,4 +92,3 @@ if __name__ == "__main__":
     for id, process in processes.items():
         process.terminate()
     net.stop()
-    return ExperimentID
