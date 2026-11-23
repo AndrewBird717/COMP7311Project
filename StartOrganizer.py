@@ -12,7 +12,7 @@ PYTHON = ".venv/bin/python"
 
 HeldKeysPerNode = 3
 DesiredKeysPerNode = 5
-KeyRange = 100
+KeyRange = 10
 
 
 def Get_HeldKeys_JSON():
