@@ -79,7 +79,7 @@ if __name__ == "__main__":
             processes[i] = host.popen([
                 PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
                 "8000", BS_IP, "8000",
-                Get_HeldKeys_JSON(), Get_DesiredKeys_JSON(), str(Alpha), str(BucketSize), stderr=None])        
+                Get_HeldKeys_JSON(), Get_DesiredKeys_JSON(), str(Alpha), str(BucketSize)], stderr=None)        
             time.sleep(2)
 
     for i, process in processes.items():
