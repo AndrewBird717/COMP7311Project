@@ -61,34 +61,47 @@ if __name__ == "__main__":
 
     for host in net.hosts:
         print(host.name, host.IP())
-    processes = {}
+    try:
 
-    ExperimentID = time.time()
+        processes = {}
 
-    for i, host in enumerate(net.hosts):
-        if i < BS_count:
-            if i == 0:
-                processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000")
+        ExperimentID = time.time()
+
+        for i, host in enumerate(net.hosts):
+            if i < BS_count:
+                if i == 0:
+                    processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000")
+                    time.sleep(1)
+                    continue
+                BS_IP = net.hosts[i-1].IP()
+                processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000 {BS_IP} 8000")
                 time.sleep(1)
-                continue
-            BS_IP = net.hosts[i-1].IP()
-            processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000 {BS_IP} 8000")
-            time.sleep(1)
-        else:
-            BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
-            processes[i] = host.popen([
-                PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
-                "8000", BS_IP, "8000",
-                Get_HeldKeys_JSON(), Get_DesiredKeys_JSON(), str(Alpha), str(BucketSize)], stderr=None)        
-            time.sleep(2)
+            else:
+                BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
+                processes[i] = host.popen([
+                    PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
+                    "8000", BS_IP, "8000",
+                    Get_HeldKeys_JSON(), Get_DesiredKeys_JSON(), str(Alpha), str(BucketSize)], stderr=None)        
+                time.sleep(2)
 
-    for i, process in processes.items():
-        print(
-            f"Node {i}: PID={process.pid}, "
-            f"Exit code={process.poll()}"
-        )
-    input("Hit enter to end (All nodes have been created)...")
+        for i, process in processes.items():
+            print(
+                f"Node {i}: PID={process.pid}, "
+                f"Exit code={process.poll()}"
+            )
+        input("Hit enter to end (All nodes have been created)...")
+    except KeyboardInterrupt:
+        print("\nStopping experiment...", flush=True)
+    finally:
+        for process in processes.values():
+            if process.poll() is None:
+                process.terminate()
 
-    for id, process in processes.items():
-        process.terminate()
+        for process in processes.values():
+            try:
+                process.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+
     net.stop()
