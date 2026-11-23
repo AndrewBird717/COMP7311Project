@@ -11,6 +11,7 @@ def GetLookupTimes():
             split_data = data.split()
             res.append(split_data)
     print(split_data)
+    return res
 
 def GetMetricsFromDataArr(data_arr):
     print(data_arr)
