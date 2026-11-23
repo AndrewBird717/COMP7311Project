@@ -44,7 +44,7 @@ if __name__ == "__main__":
     switch = net.addSwitch("s1", failMode="standalone")
 
     # Add as many hosts as you want
-    host_count = 100
+    host_count = 10
     BS_count = 1
 
     for i in range(host_count + BS_count):
