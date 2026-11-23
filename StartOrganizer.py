@@ -37,9 +37,9 @@ def Get_DesiredKeys_JSON():
 
 
 if __name__ == "__main__":
-    print(Get_DesiredKeys_JSON())
-    print(Get_HeldKeys_JSON())
-    input("stop")
+    #print(Get_DesiredKeys_JSON())
+    #print(Get_HeldKeys_JSON())
+    #input("stop")
 
     net = Mininet(
         topo=None,
