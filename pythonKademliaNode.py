@@ -15,8 +15,8 @@ BS_IP = sys.argv[4]
 BS_Port = sys.argv[5]
 HeldKeys = json.loads(sys.argv[6])
 DesiredKeys = json.loads(sys.argv[7])
-Alpha = sys.argv[8]
-BucketSize = sys.argv[9]
+Alpha = int(sys.argv[8])
+BucketSize = int(sys.argv[9])
 
 timeout = 5.0
 
