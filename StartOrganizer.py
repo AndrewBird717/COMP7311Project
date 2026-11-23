@@ -12,8 +12,8 @@ PYTHON = ".venv/bin/python"
 
 Alpha = 3
 BucketSize = 12
-HeldKeysPerNode = 8
-DesiredKeysPerNode = 10
+HeldKeysPerNode = 80
+DesiredKeysPerNode = 100
 KeyRange = 200
 
 # Add as many hosts as you want
