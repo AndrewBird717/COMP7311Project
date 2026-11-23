@@ -10,7 +10,7 @@ def GetLookupTimes():
             data = filepath.read_text(encoding="utf-8")
             split_data = data.split()
             for i in range(len(split_data)):
-                split_data[i] = int(split_data[i])
+                split_data[i] = float(split_data[i])
             res += split_data
     print(split_data)
     return res
