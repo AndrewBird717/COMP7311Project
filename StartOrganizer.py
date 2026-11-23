@@ -44,12 +44,13 @@ if __name__ == "__main__":
     switch = net.addSwitch("s1", failMode="standalone")
 
     # Add as many hosts as you want
-    host_count = 10
+    host_count = 30
     BS_count = 1
 
     for i in range(host_count + BS_count):
         host = net.addHost(f"h{i+1}")
         net.addLink(host, switch)
+        print(f"made {i}th")
 
     # Start network
     net.build()
