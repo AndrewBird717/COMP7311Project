@@ -38,7 +38,7 @@ def Get_DesiredKeys_JSON():#Deprec
 def GetHeldDict():
     res = {}
     for i in range(HeldKeysPerNode):
-        temp = random.randint
+        temp = random.randint(1, KeyRange)
         while temp in res:
             temp = random.randint(1, KeyRange)
         res[temp] = hashlib.sha1(str(temp).encode()).hexdigest()
