@@ -111,7 +111,7 @@ if __name__ == "__main__":
                     continue
                 BS_IP = net.hosts[i-1].IP()
                 processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000 {BS_IP} 8000")
-                time.sleep(1)
+                time.sleep(2)
             else:
                 Held, Desired = GetKeysJSON()
                 BS_IP = net.hosts[random.randint(0, BS_count-1)].IP()
@@ -119,7 +119,8 @@ if __name__ == "__main__":
                     PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
                     "8000", BS_IP, "8000",
                     Held, Desired, str(Alpha), str(BucketSize), UpPercentage], stderr=None)        
-                time.sleep(2)
+                time.sleep(3)
+            print(f"Node {i} made")
 
         for i, process in processes.items():
             print(
