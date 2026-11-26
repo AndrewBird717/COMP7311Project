@@ -10,15 +10,17 @@ from mininet.node import OVSSwitch
 
 PYTHON = ".venv/bin/python"
 
-Alpha = 3
-BucketSize = 12
+host_count = 40
+BS_count = 1
+Alpha = int(sys.argv[1])#3
+BucketSize = int(sys.argv[2])#12
 HeldKeysPerNode = 12
 DesiredKeysPerNode = 100
 KeyRange = 250
 
+AllHeldKeys = set()
+
 # Add as many hosts as you want
-host_count = 40
-BS_count = 1
 def Get_HeldKeys_JSON():#Deprec
     res = {}
     for i in range(HeldKeysPerNode):
@@ -41,6 +43,7 @@ def GetHeldDict():
         temp = random.randint(1, KeyRange)
         while temp in res:
             temp = random.randint(1, KeyRange)
+        AllHeldKeys.add(temp)
         res[temp] = hashlib.sha1(str(temp).encode()).hexdigest()
     return res
         
@@ -49,7 +52,7 @@ def GetDesiredDict(HeldDict):
     res = {}
     for i in range(DesiredKeysPerNode):
         temp = random.randint(1, KeyRange)
-        while temp in res or temp in HeldDict:
+        while temp in res or temp in HeldDict or temp not in AllHeldKeys:
             temp = random.randint(1, KeyRange)
         res[temp] = None
     return res
