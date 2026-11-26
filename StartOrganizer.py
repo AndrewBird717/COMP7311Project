@@ -10,14 +10,14 @@ from mininet.node import OVSSwitch
 
 PYTHON = ".venv/bin/python"
 
-host_count = 40
-BS_count = 1
-Alpha = int(sys.argv[1])#3
-BucketSize = int(sys.argv[2])#12
-HeldKeysPerNode = int(sys.argv[3])#12
-DesiredKeysPerNode = int(sys.argv[4])#100
-KeyRange = int(sys.argv[5])#250
-UpPercentage = int(sys.argv[6])#100
+host_count = sys.argv[1]#40
+BS_count = sys.argv[2]#1
+Alpha = int(sys.argv[3])#3
+BucketSize = int(sys.argv[4])#12
+HeldKeysPerNode = int(sys.argv[5])#12
+DesiredKeysPerNode = int(sys.argv[6])#100
+KeyRange = int(sys.argv[7])#250
+UpPercentage = int(sys.argv[8])#100
 
 AllHeldKeys = set()
 
