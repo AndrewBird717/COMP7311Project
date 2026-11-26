@@ -12,8 +12,8 @@ PYTHON = ".venv/bin/python"
 
 host_count = 40
 BS_count = 1
-Alpha = int(sys.argv[1])#3
-BucketSize = int(sys.argv[2])#12
+Alpha = 3#int(sys.argv[1])#3
+BucketSize = 12#int(sys.argv[2])#12
 HeldKeysPerNode = 12
 DesiredKeysPerNode = 100
 KeyRange = 250
