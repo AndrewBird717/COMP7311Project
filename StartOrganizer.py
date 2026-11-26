@@ -12,11 +12,12 @@ PYTHON = ".venv/bin/python"
 
 host_count = 40
 BS_count = 1
-Alpha = 3#int(sys.argv[1])#3
-BucketSize = 12#int(sys.argv[2])#12
-HeldKeysPerNode = 12
-DesiredKeysPerNode = 100
-KeyRange = 250
+Alpha = int(sys.argv[1])#3
+BucketSize = int(sys.argv[2])#12
+HeldKeysPerNode = int(sys.argv[3])#12
+DesiredKeysPerNode = int(sys.argv[4])#100
+KeyRange = int(sys.argv[5])#250
+UpPercentage = int(sys.argv[6])#100
 
 AllHeldKeys = set()
 
@@ -117,7 +118,7 @@ if __name__ == "__main__":
                 processes[i] = host.popen([
                     PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
                     "8000", BS_IP, "8000",
-                    Held, Desired, str(Alpha), str(BucketSize)], stderr=None)        
+                    Held, Desired, str(Alpha), str(BucketSize), UpPercentage], stderr=None)        
                 time.sleep(2)
 
         for i, process in processes.items():
