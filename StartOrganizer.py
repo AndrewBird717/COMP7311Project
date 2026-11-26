@@ -57,7 +57,7 @@ def GetDesiredDict(HeldDict):
 
 
 def GetKeysJSON():
-    HeldDict = GetHeldDict
+    HeldDict = GetHeldDict()
     DesiredDict = GetDesiredDict(HeldDict)
     HeldJSON = json.dumps(HeldDict)
     DesiredJSON = json.dumps(DesiredDict)
