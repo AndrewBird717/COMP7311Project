@@ -79,7 +79,7 @@ async def Get_KVs(node, desired_KV_dict):
             result_KV[desired_KV[i]] = temp
             my_time = 1
             try:
-                my_time = (end - start) / 1000000000
+                my_time = (end - start) / 1000000
             except:
                 my_time = 0
             times[desired_KV[i]] = my_time

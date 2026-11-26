@@ -17,12 +17,12 @@ def GetLookupTimes():
 
 def GetMetricsFromDataArr(data_arr):
     print(data_arr)
-    print("Min: ", min(data_arr))
-    print("Mean: ", np.mean(data_arr))
-    print("Median: ", np.median(data_arr))
+    print("Min: ", min(data_arr), "ms")
+    print("Mean: ", np.mean(data_arr), "ms")
+    print("Median: ", np.median(data_arr), "ms")
     for percentile in [25, 50, 90, 95, 99]:
-        print(f"{percentile}th Percentile: {np.percentile(data_arr, percentile)}\n")
-    print("Max: ", max(data_arr))
+        print(f"{percentile}th Percentile: {np.percentile(data_arr, percentile)}", "ms")
+    print("Max: ", max(data_arr), "ms")
 
 
 
