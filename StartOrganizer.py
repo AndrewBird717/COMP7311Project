@@ -7,19 +7,23 @@ import time
 from pathlib import Path
 from mininet.net import Mininet
 from mininet.node import OVSSwitch
+from NetworkTopology import CreateNetwork
 
 PYTHON = ".venv/bin/python"
 
-host_count = sys.argv[1]#40
-BS_count = sys.argv[2]#1
+host_count = int(sys.argv[1])#40
+BS_count = int(sys.argv[2])#1
 Alpha = int(sys.argv[3])#3
 BucketSize = int(sys.argv[4])#12
 HeldKeysPerNode = int(sys.argv[5])#12
 DesiredKeysPerNode = int(sys.argv[6])#100
 KeyRange = int(sys.argv[7])#250
-UpPercentage = int(sys.argv[8])#100
+UpPercentage = 100#int(sys.argv[8])#100
 
 AllHeldKeys = set()
+
+#GENERATE ALL HELD KEYS FIRST AND THEN RANDOMLY PICK DESIRED FROM THE HELD LIST
+
 
 # Add as many hosts as you want
 def Get_HeldKeys_JSON():#Deprec
@@ -73,26 +77,13 @@ if __name__ == "__main__":
     #print(Get_HeldKeys_JSON())
     #input("stop")
 
-    net = Mininet(
-        topo=None,
-        build=False,
-        controller=None,
-        switch=OVSSwitch
+    net, hosts = net, hosts = CreateNetwork(
+    router_count=host_count * 2,
+    host_count=host_count,
+    extra_links=5,
+    seed=42
     )
 
-    # Create one switch
-    switch = net.addSwitch("s1", failMode="standalone")
-
-
-
-    for i in range(host_count + BS_count):
-        host = net.addHost(f"h{i+1}")
-        net.addLink(host, switch)
-        print(f"made {i}th")
-
-    # Start network
-    net.build()
-    net.start()
     print("Created hosts:", [h.name for h in net.hosts])
 
     for host in net.hosts:

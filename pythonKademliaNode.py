@@ -18,7 +18,7 @@ HeldKeys = json.loads(sys.argv[6])
 DesiredKeys = json.loads(sys.argv[7])
 Alpha = int(sys.argv[8])
 BucketSize = int(sys.argv[9])
-UpPercentage = int(sys.arv[10])
+UpPercentage = int(sys.argv[10])
 
 timeout = 5.0
 
@@ -70,9 +70,6 @@ async def Get_KVs(node, desired_KV_dict):
     times = {}
     i = 0
     while (i < len(desired_KV) and keepRunning) or keepRunning:
-        downchance = random.randint(1, 100)
-        if downchance > UpPercentage:
-            asyncio.sleep(random.randint(10, 20))
         start = time.time_ns()
         if i >= len(desired_KV):
             if len(desired_KV) <= 0:
