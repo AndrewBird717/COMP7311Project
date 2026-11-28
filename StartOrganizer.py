@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
         ExperimentID = time.time()
 
-        for i, host in enumerate(net.hosts):
+        for i, host in enumerate(hosts):
             if i < BS_count:
                 if i == 0:
                     processes[i] = host.popen(f"{PYTHON} pythonKademliaBootstrapNode.py {i} {ExperimentID} 8000")
@@ -109,7 +109,7 @@ if __name__ == "__main__":
                 processes[i] = host.popen([
                     PYTHON, "pythonKademliaNode.py", str(i), str(ExperimentID),
                     "8000", BS_IP, "8000",
-                    Held, Desired, str(Alpha), str(BucketSize), UpPercentage], stderr=None)        
+                    Held, Desired, str(Alpha), str(BucketSize), str(UpPercentage)], stderr=None)        
                 time.sleep(3)
             print(f"Node {i} made")
 
