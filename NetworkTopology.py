@@ -105,6 +105,7 @@ def CreateNetwork(router_count, host_count, extra_links=0, seed=None):
         host_links.append((h, r, link, ip))
 
     # Start Mininet
+    OVSSwitch.setup()
     net.build()
     net.start()
 
